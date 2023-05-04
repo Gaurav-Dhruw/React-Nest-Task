@@ -27,6 +27,7 @@ export const AccordianSection = ({data}:{data:accordianItemInterface[]}) => {
     const {FAQs, setActiveSubTopic, setActiveTopic} = useFAQs();
     const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      event
       setExpanded(isExpanded ? panel : false);
     };
 
@@ -40,7 +41,7 @@ export const AccordianSection = ({data}:{data:accordianItemInterface[]}) => {
   return (
     <div className='w-3/5 mx-auto'>
         {data.map((accordianItem,index)=>(
-                <Accordion expanded={expanded === index.toString()} onChange={handleChange(index.toString())}>
+                <Accordion key={index} expanded={expanded === index.toString()} onChange={handleChange(index.toString())}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                 >
@@ -57,7 +58,7 @@ export const AccordianSection = ({data}:{data:accordianItemInterface[]}) => {
             >   
                 {accordianItem.subtopics.map(listItem=>(
 
-                    <Link to={accordianItem.slug} onClick={()=>handleSubTopicChange(accordianItem.slug,listItem.slug)}>
+                    <Link key={accordianItem.slug+listItem.slug} to={accordianItem.slug} onClick={()=>handleSubTopicChange(accordianItem.slug,listItem.slug)}>
                         <ListItemButton>
                             <ListItemText primary={listItem.name} />
                         </ListItemButton>

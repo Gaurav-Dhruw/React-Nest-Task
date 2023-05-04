@@ -5,14 +5,14 @@ import { AccordianSection } from '../components/AccordianSection';
 
 import apiClient from '../lib/axios.config'
 import { useQuery } from 'react-query';
-import { CircularProgress } from '@mui/material';
+
 import { useFAQs } from '../context/ContextProvider';
 import { Loader } from '../components/Loader';
 
 const Topic = () => {
   const {topic} = useParams();
   const {setFAQs, FAQs} = useFAQs();
-  const {isLoading, data} = useQuery('FAQs', async ()=>{
+  const {isLoading} = useQuery('FAQs', async ()=>{
     const res = await apiClient.get('/api/FAQs');
     setFAQs(res.data);
     return res.data;

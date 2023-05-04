@@ -2,10 +2,9 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Link, useLocation } from 'react-router-dom';
-import SendIcon from '@mui/icons-material/Send';
+// import { Link, useLocation } from 'react-router-dom';
 import { useFAQs } from '../context/ContextProvider';
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 interface listItemInterface{
     name:string,
@@ -13,7 +12,7 @@ interface listItemInterface{
 }
 
 export const SideMenu = ({listItems}:{listItems:listItemInterface[]}) => {
-  const url = useLocation().pathname;
+  // const url = useLocation().pathname;
   const{activeTopic, setActiveSubTopic} = useFAQs();
 
   const handleSubTopicChange= (subTopicSlug:string)=>{
@@ -41,9 +40,9 @@ export const SideMenu = ({listItems}:{listItems:listItemInterface[]}) => {
         {
             listItems.map(listItem=>(
 
-                <ListItemButton onClick={()=>handleSubTopicChange(listItem.slug)}>
+                <ListItemButton key={listItem.slug} onClick={()=>handleSubTopicChange(listItem.slug)}>
                     <ListItemIcon>
-                        <SendIcon />
+                        <ArrowForwardIosIcon />
                     </ListItemIcon>
                     <ListItemText primary={listItem.name} />
                 </ListItemButton>

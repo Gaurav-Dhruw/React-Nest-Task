@@ -17,10 +17,10 @@ export const Breadcrumb = () => {
                     Home
                 </Link>
             {
-                slugs.map(slug=>{
+                slugs.map((slug,index)=>{
                     path+=`/${slug}`;
                     return(
-                <Link to={path}>
+                <Link key={index} to={path}>
                     {slug.charAt(0).toUpperCase()+slug.slice(1)}
                 </Link>
                 )})
