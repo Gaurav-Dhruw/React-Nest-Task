@@ -7,6 +7,8 @@ const ContextProvider =({children}:{children:ReactNode})=>{
     const [FAQs, setFAQs] = useState(null);
     const [activeTopic, setActiveTopic] = useState(null);
     const [activeSubTopic, setActiveSubTopic] = useState(null);
+    const [searchValue, setSearchValue] = useState(null);
+    const [suggestions, setSuggestions] = useState([]);
     return (
         <FAQContext.Provider
             value={{
@@ -15,7 +17,11 @@ const ContextProvider =({children}:{children:ReactNode})=>{
                 activeTopic,
                 setActiveTopic,
                 activeSubTopic,
-                setActiveSubTopic
+                setActiveSubTopic,
+                searchValue,
+                setSearchValue,
+                suggestions,
+                setSuggestions
             }}>
             {children}
         </FAQContext.Provider>

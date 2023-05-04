@@ -7,6 +7,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
+import { useClickAway } from '../hooks/useClickAway';
+
 
 
 
@@ -35,6 +37,7 @@ const cardsData = [
 
 const Home = () => {
   const {section} = useParams();
+  useClickAway();
   
   return (
     <>

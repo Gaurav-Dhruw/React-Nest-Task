@@ -8,6 +8,7 @@ import { useQuery } from 'react-query';
 
 import { useFAQs } from '../context/ContextProvider';
 import { Loader } from '../components/Loader';
+import { SerachBar } from '../components/SerachBar';
 
 const Topic = () => {
   const {topic} = useParams();
@@ -18,13 +19,18 @@ const Topic = () => {
     return res.data;
   });
   if(isLoading) return <Loader/>
-  console.log(FAQs);
+
   return (
     <>
     {topic?
       <Outlet/>:
       <div className='p-20'>
-        <AccordianSection data={FAQs}/>
+        <div className='flex justify-center'>
+          <SerachBar/>
+        </div>
+        <div className='p-2 mt-16'>
+          <AccordianSection data={FAQs}/>
+        </div>
       </div>
     
   }
