@@ -1,22 +1,42 @@
-import { useParams } from "react-router-dom";
+
 import { SideMenu } from "../components/SideMenu";
 import { SubTopicSection } from "../components/SubTopicSection";
+import { useEffect, useState } from "react";
+import { useFAQs } from "../context/ContextProvider";
 
-const data={name:"link1", content:'link1', listItems:[{name:"subtopic1" ,slug:'link1'},{name:"subtopic2" ,slug:'link2'},{name:"subtopic3" ,slug:'link3'}]};
+import { Loader } from "../components/Loader";
+import { useParams } from "react-router-dom";
+
+
 const SubTopic = () => {
-  const {subtopic} = useParams();
+  const [isLoading, setLoading] = useState(true);
+  const {activeSubTopic, FAQs, activeTopic, setActiveTopic, setActiveSubTopic} = useFAQs();
+  const {topic} = useParams();
+
+  useEffect(()=>{
+    if(!activeSubTopic){
+      const Topic = FAQs.find((FAQ:any)=>(FAQ.slug===topic));
+      const subTopic = Topic.subtopics[0]
+      setActiveTopic(Topic);
+      setActiveSubTopic(subTopic);
+    }
+    setLoading(false);
+  },[]);
+
+  if(isLoading) return <Loader></Loader>;
+  
 
   return (
     <div className="mx-auto p-20 ">
 
       <div className="mx-20 grid grid-cols-3 gap-20 place-content-center">
         <div className="col-span-2">
-        <SubTopicSection  data={data}/>
+        <SubTopicSection  data={activeSubTopic}/>
 
         </div>
         <div className="align-start">
 
-        <SideMenu listItems={data.listItems}/>
+        <SideMenu listItems={activeTopic.subtopics}/>
         </div>
       </div>
     </div>

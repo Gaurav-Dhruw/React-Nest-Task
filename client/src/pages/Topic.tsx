@@ -1,16 +1,30 @@
 
 import { Outlet, useParams } from 'react-router-dom'
 import { AccordianSection } from '../components/AccordianSection';
-const data=[{title:"General Settings", listItems:[{name:"link1", slug:'link1'}]}];
+
+
+import apiClient from '../lib/axios.config'
+import { useQuery } from 'react-query';
+import { CircularProgress } from '@mui/material';
+import { useFAQs } from '../context/ContextProvider';
+import { Loader } from '../components/Loader';
+
 const Topic = () => {
-  const {subtopic} = useParams();
-  console.log(subtopic);
+  const {topic} = useParams();
+  const {setFAQs, FAQs} = useFAQs();
+  const {isLoading, data} = useQuery('FAQs', async ()=>{
+    const res = await apiClient.get('/api/FAQs');
+    setFAQs(res.data);
+    return res.data;
+  });
+  if(isLoading) return <Loader/>
+  console.log(FAQs);
   return (
     <>
-    {subtopic?
+    {topic?
       <Outlet/>:
       <div className='p-20'>
-        <AccordianSection data={data}/>
+        <AccordianSection data={FAQs}/>
       </div>
     
   }

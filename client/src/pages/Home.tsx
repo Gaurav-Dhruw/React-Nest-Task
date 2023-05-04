@@ -8,6 +8,8 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 
+
+
 const cardsData = [
   {
     icon:<SettingsIcon fontSize='large'/>, 
@@ -32,13 +34,14 @@ const cardsData = [
 ];
 
 const Home = () => {
-  const {topic} = useParams();
+  const {section} = useParams();
+  
   return (
     <>
     <div className='p-10'>
     <Breadcrumb/>
     {
-      topic?<Outlet/>:
+      section?<Outlet/>:
       <div className='w-full p-20 flex flex-col items-center'>
         <SerachBar/>
         <div className='w-3/4 p-10 grid grid-cols-4 gap-2'>
